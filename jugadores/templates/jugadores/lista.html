@@ -1,0 +1,36 @@
+{% extends "jugadores/base.html" %}
+{% block title %}Jugadores | Club Deportivo{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+ <div><h1 class="h2 mb-1">Jugadores</h1><p class="text-secondary mb-0">Listado de integrantes del club.</p></div>
+ <a class="btn btn-success" href="{% url 'jugadores:crear_jugador' %}">+ Registrar jugador</a>
+</div>
+<div class="card p-3 p-md-4">
+ <form method="get" class="row g-2 mb-3">
+  <div class="col"><input class="form-control" type="search" name="q" value="{{ query }}" placeholder="Buscar por nombre, apellido o camiseta"></div>
+  <div class="col-auto"><button class="btn btn-dark">Buscar</button></div>
+  {% if query %}<div class="col-auto"><a class="btn btn-outline-secondary" href="{% url 'jugadores:lista_jugadores' %}">Limpiar</a></div>{% endif %}
+ </form>
+ <div class="table-responsive">
+ <table class="table align-middle">
+  <thead><tr><th>Jugador</th><th>Camiseta</th><th>Posición</th><th>Edad</th><th>Estado</th><th>Acciones</th></tr></thead>
+  <tbody>
+  {% for jugador in jugadores %}
+   <tr>
+    <td class="fw-semibold">{{ jugador.nombre }} {{ jugador.apellido }}</td>
+    <td>#{{ jugador.numero_camiseta }}</td><td>{{ jugador.get_posicion_display }}</td><td>{{ jugador.edad }}</td>
+    <td>{% if jugador.activo %}<span class="badge text-bg-success">Activo</span>{% else %}<span class="badge text-bg-secondary">Inactivo</span>{% endif %}</td>
+    <td class="text-nowrap">
+     <a class="btn btn-sm btn-outline-dark" href="{% url 'jugadores:detalle_jugador' jugador.pk %}">Ver</a>
+     <a class="btn btn-sm btn-outline-primary" href="{% url 'jugadores:editar_jugador' jugador.pk %}">Editar</a>
+     <a class="btn btn-sm btn-outline-danger" href="{% url 'jugadores:eliminar_jugador' jugador.pk %}">Eliminar</a>
+    </td>
+   </tr>
+  {% empty %}
+   <tr><td colspan="6" class="text-center text-secondary py-4">No hay jugadores registrados.</td></tr>
+  {% endfor %}
+  </tbody>
+ </table></div>
+ <div class="text-secondary small">Total mostrado: {{ jugadores|length }}</div>
+</div>
+{% endblock %}

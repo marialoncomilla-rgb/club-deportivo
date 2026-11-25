@@ -1,0 +1,24 @@
+{% extends "jugadores/base.html" %}
+{% block title %}Inicio | Club Deportivo{% endblock %}
+{% block content %}
+<section class="hero p-4 p-md-5 mb-4">
+ <div class="row align-items-center">
+  <div class="col-md-8">
+   <span class="badge bg-light text-success mb-3">Administración deportiva</span>
+   <h1 class="display-5 fw-bold">Gestión de jugadores</h1>
+   <p class="lead mb-4">Administra la información de los integrantes del club desde un solo lugar.</p>
+   <a class="btn btn-light btn-lg me-2" href="{% url 'jugadores:lista_jugadores' %}">Ver jugadores</a>
+   <a class="btn btn-outline-light btn-lg" href="{% url 'jugadores:crear_jugador' %}">Registrar jugador</a>
+  </div>
+  <div class="col-md-4 text-center display-1">⚽</div>
+ </div>
+</section>
+<div class="row g-3">
+ <div class="col-md-6"><div class="card p-4"><div class="text-secondary">Jugadores registrados</div><div class="display-4 fw-bold">{{ total_jugadores }}</div></div></div>
+ <div class="col-md-6"><div class="card p-4"><div class="text-secondary">Jugadores activos</div><div class="display-4 fw-bold text-success">{{ jugadores_activos }}</div></div></div>
+</div>
+<div class="card p-4 mt-4">
+ <h2 class="h5">¿Qué puedes hacer?</h2>
+ <p class="mb-0">Registrar nuevos jugadores, consultar sus datos, modificar información y eliminar registros cuando corresponda.</p>
+</div>
+{% endblock %}

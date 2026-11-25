@@ -1,0 +1,20 @@
+{% extends "jugadores/base.html" %}
+{% block title %}Detalle del jugador{% endblock %}
+{% block content %}
+<div class="row justify-content-center"><div class="col-lg-8">
+ <a href="{% url 'jugadores:lista_jugadores' %}" class="text-decoration-none">← Volver al listado</a>
+ <div class="card p-4 p-md-5 mt-3">
+  <div class="d-flex justify-content-between align-items-start"><div><span class="text-secondary">Ficha del jugador</span><h1 class="h2">{{ jugador.nombre }} {{ jugador.apellido }}</h1></div><div class="display-5">⚽</div></div>
+  <div class="row g-3 mt-2">
+   <div class="col-sm-6"><span class="text-secondary">Número de camiseta</span><div class="fw-semibold">#{{ jugador.numero_camiseta }}</div></div>
+   <div class="col-sm-6"><span class="text-secondary">Posición</span><div class="fw-semibold">{{ jugador.get_posicion_display }}</div></div>
+   <div class="col-sm-6"><span class="text-secondary">Edad</span><div class="fw-semibold">{{ jugador.edad }} años</div></div>
+   <div class="col-sm-6"><span class="text-secondary">Fecha de ingreso</span><div class="fw-semibold">{{ jugador.fecha_ingreso|date:"d/m/Y" }}</div></div>
+   <div class="col-sm-6"><span class="text-secondary">Correo</span><div class="fw-semibold">{{ jugador.correo|default:"No informado" }}</div></div>
+   <div class="col-sm-6"><span class="text-secondary">Teléfono</span><div class="fw-semibold">{{ jugador.telefono|default:"No informado" }}</div></div>
+   <div class="col-12"><span class="text-secondary">Estado</span><div>{% if jugador.activo %}Activo{% else %}Inactivo{% endif %}</div></div>
+  </div>
+  <div class="mt-4 d-flex gap-2"><a class="btn btn-primary" href="{% url 'jugadores:editar_jugador' jugador.pk %}">Editar</a><a class="btn btn-outline-danger" href="{% url 'jugadores:eliminar_jugador' jugador.pk %}">Eliminar</a></div>
+ </div>
+</div></div>
+{% endblock %}

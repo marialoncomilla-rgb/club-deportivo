@@ -1,0 +1,26 @@
+{% extends "jugadores/base.html" %}
+{% block title %}{{ titulo }} | Club Deportivo{% endblock %}
+{% block content %}
+<div class="row justify-content-center"><div class="col-lg-8">
+ <div class="mb-3"><a href="{% url 'jugadores:lista_jugadores' %}" class="text-decoration-none">← Volver al listado</a></div>
+ <div class="card p-4 p-md-5">
+  <h1 class="h2 mb-1">{{ titulo }}</h1><p class="text-secondary mb-4">Completa los datos del jugador.</p>
+  <form method="post" novalidate>{% csrf_token %}
+   {% if form.non_field_errors %}<div class="alert alert-danger">{{ form.non_field_errors }}</div>{% endif %}
+   <div class="row g-3">
+   {% for field in form %}
+    <div class="{% if field.name == 'activo' %}col-12{% else %}col-md-6{% endif %}">
+     {% if field.name == 'activo' %}
+      <div class="form-check mt-2">{{ field }} <label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label></div>
+     {% else %}
+      <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}
+     {% endif %}
+     {% for error in field.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+    </div>
+   {% endfor %}
+   </div>
+   <div class="d-flex gap-2 mt-4"><button class="btn btn-success btn-lg" type="submit">{{ texto_boton|default:"Guardar" }}</button><a class="btn btn-outline-secondary btn-lg" href="{% url 'jugadores:lista_jugadores' %}">Cancelar</a></div>
+  </form>
+ </div>
+</div></div>
+{% endblock %}
