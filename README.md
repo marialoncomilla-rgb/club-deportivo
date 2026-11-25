@@ -107,3 +107,7 @@ Club_Deportivo_Dasne/
 - No incluye inicio de sesión porque la pauta indica que no se debe desarrollar login ni registro de usuarios.
 - Para evidenciar Git/GitHub, crea tu rama personal y realiza commits reales con tus cambios. No inventes commits ni capturas.
 - La aplicación debe ejecutarse en el computador donde se hará la presentación. Prueba la conexión antes de la evaluación.
+
+## 7. Equipo de trabajo
+- Maria Obando - Desarrollo CRUD, vistas, formularios, plantillas y enrutamiento con namespace `jugadores:`.
+- Integrante 2 - Pruebas funcionales del CRUD, validacion de datos y verificacion en MariaDB/phpMyAdmin.
